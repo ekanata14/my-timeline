@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roadmap 2027: Skripsi, S2, & Karir</title>
+    <title>Roadmap &amp; Kalender Akademik 2026/2027 — ITB STIKOM Bali</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -15,15 +16,42 @@
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
                         akademik: '#3b82f6', // blue-500
+                        yudisium: '#f59e0b', // amber-500
+                        libur:    '#f43f5e', // rose-500
+                        ta:       '#a855f7', // purple-500
                         beasiswa: '#a855f7', // purple-500
-                        karir: '#10b981',    // emerald-500
+                        karir:    '#10b981', // emerald-500
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #0f172a; color: #f8fafc; overflow-x: hidden; }
+        body {
+            background-color: #0b1120;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(59,130,246,0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(168,85,247,0.10) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16,185,129,0.10) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        .glass { background: rgba(30, 41, 59, 0.55); backdrop-filter: blur(12px); }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
+        .day-cell { transition: background-color .15s ease, box-shadow .15s ease; }
+        .day-cell:hover { background-color: rgba(51, 65, 85, 0.45); }
+        .chip { transition: transform .12s ease, filter .12s ease; }
+        .chip:hover { transform: translateY(-1px); filter: brightness(1.25); }
+        .event-row:hover { border-color: rgba(148,163,184,0.5); }
+        .scale-in { animation: scaleIn .2s ease-out; }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: scale(1); } }
+        /* View switcher */
+        .tab-btn { transition: background-color .2s ease, color .2s ease; }
+        .tab-btn.active { background-color: #2563eb; color: #fff; box-shadow: 0 8px 24px -8px rgba(37,99,235,0.8); }
         /* Timeline line for desktop */
         @media (min-width: 768px) {
             .timeline-line::before {
@@ -42,54 +70,737 @@
                 background-color: #334155;
             }
         }
-        .modal-enter { opacity: 0; transform: scale(0.95); }
-        .modal-enter-active { opacity: 1; transform: scale(1); transition: opacity 300ms, transform 300ms; }
-        .modal-leave { opacity: 1; transform: scale(1); }
-        .modal-leave-active { opacity: 0; transform: scale(0.95); transition: opacity 300ms, transform 300ms; }
     </style>
 </head>
-<body class="antialiased min-h-screen pb-20">
+<body class="antialiased min-h-screen pb-24 font-sans">
 
-    <header class="pt-16 pb-8 px-6 text-center max-w-4xl mx-auto">
-        <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-emerald-400 mb-4">
-            Roadmap 2026 - 2027
-        </h1>
-        <p class="text-gray-400 text-lg mb-8">Pemetaan strategis menuju Wisuda, Beasiswa S2, dan Karir IT / CPNS.</p>
-        
-        <div class="flex flex-wrap justify-center gap-3" id="filters">
-            <button data-filter="all" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition-all bg-gray-700 text-white hover:bg-gray-600 ring-2 ring-gray-400">Semua</button>
-            <button data-filter="akademik" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition-all bg-gray-800 text-gray-300 hover:text-white border border-blue-500 hover:bg-blue-600/20">🎓 Akademik</button>
-            <button data-filter="beasiswa" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition-all bg-gray-800 text-gray-300 hover:text-white border border-purple-500 hover:bg-purple-600/20">🌍 Beasiswa S2</button>
-            <button data-filter="karir" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition-all bg-gray-800 text-gray-300 hover:text-white border border-emerald-500 hover:bg-emerald-600/20">💼 Karir</button>
+    <!-- HEADER -->
+    <header class="pt-10 pb-6 px-4 sm:px-6 max-w-6xl mx-auto">
+        <div class="text-center">
+            <span class="inline-flex items-center gap-2 text-[11px] font-semibold tracking-widest uppercase text-blue-300/80 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full mb-4">
+                <i class="fa-solid fa-graduation-cap"></i> ITB STIKOM Bali
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-emerald-400 mb-3">
+                Roadmap &amp; Kalender 2026 / 2027
+            </h1>
+            <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
+                Agenda akademik resmi berpadu dengan milestone pribadi Tugas Akhir (IoT Wheelchair),
+                beasiswa S2, dan persiapan karir — dalam satu halaman.
+            </p>
+
+            <!-- VIEW SWITCHER -->
+            <div class="flex justify-center mt-7">
+                <div class="inline-flex bg-gray-800/70 border border-gray-700 rounded-2xl p-1 gap-1">
+                    <button id="tab-calendar" class="tab-btn active px-5 py-2.5 rounded-xl text-sm font-semibold text-gray-300 flex items-center gap-2">
+                        <i class="fa-regular fa-calendar-days"></i> Kalender Bulanan
+                    </button>
+                    <button id="tab-roadmap" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold text-gray-300 flex items-center gap-2">
+                        <i class="fa-solid fa-timeline"></i> Roadmap
+                    </button>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 relative mt-8">
-        <div id="timeline-container" class="timeline-line relative w-full">
-            <!-- Timeline items injected by JS -->
-        </div>
-    </main>
+    <!-- =========================================================
+         VIEW: KALENDER BULANAN
+    ========================================================= -->
+    <section id="view-calendar">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="glass rounded-2xl border border-gray-700/60 p-4 sm:p-5 mb-6">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <div class="flex items-center justify-between sm:justify-start gap-3">
+                        <button id="prev-btn" aria-label="Bulan sebelumnya"
+                            class="w-10 h-10 rounded-xl bg-gray-800 hover:bg-blue-600 border border-gray-700 hover:border-blue-500 text-gray-200 flex items-center justify-center transition-colors">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <div class="text-center sm:text-left min-w-[190px]">
+                            <h2 id="month-label" class="text-xl sm:text-2xl font-bold text-white leading-tight">Oktober 2026</h2>
+                            <p id="month-sub" class="text-xs text-gray-500">T.A. 2026/2027</p>
+                        </div>
+                        <button id="next-btn" aria-label="Bulan berikutnya"
+                            class="w-10 h-10 rounded-xl bg-gray-800 hover:bg-blue-600 border border-gray-700 hover:border-blue-500 text-gray-200 flex items-center justify-center transition-colors">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                        <button id="today-btn"
+                            class="ml-1 px-4 h-10 rounded-xl bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-200 text-sm font-medium transition-colors">
+                            <i class="fa-solid fa-calendar-day mr-1.5"></i>Hari Ini
+                        </button>
+                    </div>
 
-    <!-- Modal -->
-    <div id="modal-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
-        <div id="modal-content" class="bg-gray-800 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col max-h-[90vh]">
-            <div id="modal-header" class="p-6 border-b border-gray-700 flex justify-between items-start">
-                <div>
-                    <span id="modal-category" class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2 inline-block"></span>
-                    <h2 id="modal-title" class="text-2xl font-bold text-white mt-2"></h2>
+                    <div id="next-agenda" class="hidden lg:flex items-center gap-3 text-sm bg-gray-900/60 border border-gray-700/70 rounded-xl px-4 py-2 max-w-md"></div>
+                </div>
+
+                <div id="filters" class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-700/50"></div>
+            </div>
+        </div>
+
+        <main class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_340px] gap-6">
+            <section class="glass rounded-2xl border border-gray-700/60 overflow-hidden">
+                <div id="dow-header" class="grid grid-cols-7 bg-gray-900/60 border-b border-gray-700/60"></div>
+                <div id="calendar-grid" class="grid grid-cols-7"></div>
+            </section>
+
+            <aside class="glass rounded-2xl border border-gray-700/60 p-5 h-fit xl:sticky xl:top-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-blue-400"></i> Agenda Bulan Ini
+                    </h3>
+                    <span id="agenda-count" class="text-xs font-semibold bg-gray-800 text-gray-300 px-2 py-1 rounded-full">0</span>
+                </div>
+                <div id="agenda-list" class="space-y-2.5 max-h-[560px] overflow-y-auto custom-scrollbar pr-1"></div>
+            </aside>
+        </main>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-6">
+            <div class="glass rounded-2xl border border-gray-700/60 p-4 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-400">
+                <span class="font-semibold text-gray-300">Keterangan:</span>
+                <div id="legend" class="flex flex-wrap gap-x-5 gap-y-2"></div>
+            </div>
+            <p class="text-xs text-gray-500 mt-4 text-center">
+                Agenda bertanda <span class="text-purple-400 font-semibold">Target Pribadi</span> adalah milestone Tugas Akhir / karir Anda sendiri,
+                diselaraskan dengan kalender resmi agar tetap realistis. Data akademik mengacu pada Kalender Akademik ITB STIKOM Bali T.A. 2026/2027.
+            </p>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         VIEW: ROADMAP
+    ========================================================= -->
+    <section id="view-roadmap" class="hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div id="filters-roadmap" class="flex flex-wrap justify-center gap-3 mb-10">
+                <button data-filter="all" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition-all bg-gray-700 text-white hover:bg-gray-600 ring-2 ring-gray-400">Semua</button>
+                <button data-filter="akademik" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition-all bg-gray-800 text-gray-300 hover:text-white border border-blue-500 hover:bg-blue-600/20">🎓 Akademik</button>
+                <button data-filter="beasiswa" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition-all bg-gray-800 text-gray-300 hover:text-white border border-purple-500 hover:bg-purple-600/20">🌍 Beasiswa S2</button>
+                <button data-filter="karir" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition-all bg-gray-800 text-gray-300 hover:text-white border border-emerald-500 hover:bg-emerald-600/20">💼 Karir</button>
+            </div>
+        </div>
+
+        <main class="max-w-5xl mx-auto px-4 relative">
+            <div id="timeline-container" class="timeline-line relative w-full">
+                <!-- Timeline items injected by JS -->
+            </div>
+        </main>
+    </section>
+
+    <!-- =========================================================
+         SHARED MODAL
+    ========================================================= -->
+    <div id="modal-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4 opacity-0 transition-opacity duration-200">
+        <div id="modal-panel" class="bg-gray-800 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-200 flex flex-col max-h-[88vh] border border-gray-700">
+            <div class="p-5 sm:p-6 border-b border-gray-700 flex justify-between items-start gap-4">
+                <div class="min-w-0">
+                    <span id="modal-category" class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full inline-block mb-2"></span>
+                    <h2 id="modal-title" class="text-xl sm:text-2xl font-bold text-white mt-1"></h2>
                     <p id="modal-date" class="text-gray-400 text-sm mt-1"></p>
                 </div>
-                <button id="close-modal" class="text-gray-400 hover:text-white transition-colors bg-gray-700 hover:bg-gray-600 rounded-full w-8 h-8 flex items-center justify-center">
-                    <i class="fas fa-times"></i>
+                <button id="close-modal" class="flex-shrink-0 text-gray-400 hover:text-white bg-gray-700 hover:bg-gray-600 rounded-full w-9 h-9 flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-times"></i>
                 </button>
             </div>
-            <div id="modal-body" class="p-6 overflow-y-auto custom-scrollbar text-gray-300 leading-relaxed space-y-4">
-                <!-- Content injected by JS -->
-            </div>
+            <div id="modal-body" class="p-5 sm:p-6 overflow-y-auto custom-scrollbar text-gray-300 leading-relaxed space-y-4"></div>
         </div>
     </div>
 
     <script>
+        /* =========================================================
+           SHARED MODAL
+        ========================================================= */
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalPanel    = document.getElementById('modal-panel');
+        const modalCatEl    = document.getElementById('modal-category');
+        const modalTitleEl  = document.getElementById('modal-title');
+        const modalDateEl   = document.getElementById('modal-date');
+        const modalBodyEl   = document.getElementById('modal-body');
+
+        function showModalPanel() {
+            modalBackdrop.classList.remove('hidden');
+            modalBackdrop.classList.add('flex');
+            requestAnimationFrame(() => {
+                modalBackdrop.classList.remove('opacity-0');
+                modalPanel.classList.remove('scale-95');
+                modalPanel.classList.add('scale-in');
+            });
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            modalBackdrop.classList.add('opacity-0');
+            modalPanel.classList.remove('scale-in');
+            modalPanel.classList.add('scale-95');
+            setTimeout(() => {
+                modalBackdrop.classList.add('hidden');
+                modalBackdrop.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 200);
+        }
+        function openModalPanel({ categoryText, categoryClass, title, titleHTML, date, body }) {
+            modalCatEl.textContent = categoryText;
+            modalCatEl.className = `text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full inline-block mb-2 ${categoryClass}`;
+            if (titleHTML) modalTitleEl.innerHTML = titleHTML;
+            else modalTitleEl.textContent = title;
+            modalDateEl.textContent = date;
+            modalBodyEl.innerHTML = body;
+            showModalPanel();
+        }
+
+        document.getElementById('close-modal').addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modalBackdrop.classList.contains('hidden')) closeModal();
+        });
+
+        /* =========================================================
+           VIEW SWITCHER
+        ========================================================= */
+        const tabCalendar  = document.getElementById('tab-calendar');
+        const tabRoadmap   = document.getElementById('tab-roadmap');
+        const viewCalendar = document.getElementById('view-calendar');
+        const viewRoadmap  = document.getElementById('view-roadmap');
+
+        function setView(view) {
+            const isCalendar = view === 'calendar';
+            viewCalendar.classList.toggle('hidden', !isCalendar);
+            viewRoadmap.classList.toggle('hidden', isCalendar);
+            tabCalendar.classList.toggle('active', isCalendar);
+            tabRoadmap.classList.toggle('active', !isCalendar);
+            tabCalendar.classList.toggle('text-gray-300', !isCalendar);
+            tabRoadmap.classList.toggle('text-gray-300', isCalendar);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        tabCalendar.addEventListener('click', () => setView('calendar'));
+        tabRoadmap.addEventListener('click', () => setView('roadmap'));
+
+        /* =========================================================
+           KALENDER — KATEGORI
+        ========================================================= */
+        const CATEGORIES = {
+            akademik: { label: 'Akademik',              dot: '#3b82f6', chip: 'bg-blue-500/15 text-blue-100 border-blue-500/40',      badge: 'bg-blue-900/70 text-blue-300 border border-blue-500/30' },
+            yudisium: { label: 'Yudisium & Wisuda',     dot: '#f59e0b', chip: 'bg-amber-500/15 text-amber-100 border-amber-500/40',   badge: 'bg-amber-900/70 text-amber-300 border border-amber-500/30' },
+            libur:    { label: 'Libur & Cuti Bersama',  dot: '#f43f5e', chip: 'bg-rose-500/15 text-rose-100 border-rose-500/40',      badge: 'bg-rose-900/70 text-rose-300 border border-rose-500/30' },
+            ta:       { label: 'Tugas Akhir',           dot: '#a855f7', chip: 'bg-purple-500/15 text-purple-100 border-purple-500/40', badge: 'bg-purple-900/70 text-purple-300 border border-purple-500/30' },
+            karir:    { label: 'Beasiswa & Karier',     dot: '#10b981', chip: 'bg-emerald-500/15 text-emerald-100 border-emerald-500/40', badge: 'bg-emerald-900/70 text-emerald-300 border border-emerald-500/30' },
+        };
+
+        /* =========================================================
+           KALENDER — DATA EVENT (ISO: YYYY-MM-DD)
+        ========================================================= */
+        const EVENTS = [
+            /* ---------- JULI 2026 ---------- */
+            { id: 1, start: '2026-07-21', end: '2026-07-23', category: 'akademik',
+              title: 'Penyusunan KRS Semester Antara T.A. 2025/2026',
+              details: `<p>Pengisian kartu rencana studi untuk Semester Antara.</p>
+                <h3 class="text-base font-semibold text-white mt-3">Yang perlu disiapkan</h3>
+                <ul class="list-disc pl-5 space-y-1.5">
+                    <li>Daftar mata kuliah (MK) yang akan diambil pada semester antara.</li>
+                    <li>Pastikan jadwal MK tidak mengganggu progres bimbingan Tugas Akhir.</li>
+                    <li>Konsultasikan beban SKS dengan Dosen Pembimbing Akademik.</li>
+                </ul>` },
+
+            { id: 2, start: '2026-07-25', end: '2026-07-25', category: 'yudisium',
+              title: 'Batas Akhir Pendaftaran Yudisium 2 Semester Genap T.A. 2025/2026',
+              details: `<p>Batas akhir pendaftaran yudisium periode 2. Bagi yang menyelesaikan studi pada periode ini, pastikan seluruh syarat administrasi sudah lengkap sebelum tanggal ini.</p>` },
+
+            { id: 3, start: '2026-07-27', end: '2026-08-02', category: 'akademik',
+              title: 'Perkuliahan Pertemuan 1, 2, 3 Semester Antara T.A. 2025/2026',
+              details: `<p>Rangkaian perkuliahan awal Semester Antara (pertemuan 1–3).</p>
+                <p class="text-sm text-gray-400">💡 Gunakan momentum ini untuk mengejar MK pengulangan/perbaikan nilai agar IPK makin kuat untuk syarat beasiswa S2.</p>` },
+
+            /* ---------- SEPTEMBER 2026 ---------- */
+            { id: 4, start: '2026-09-10', end: '2026-09-10', category: 'akademik',
+              title: 'Batas Pengumpulan Nilai Semester Antara T.A. 2025/2026',
+              details: `<p>Batas akhir dosen mengumpulkan nilai Semester Antara. Cek portal akademik untuk memastikan nilai Anda sudah masuk.</p>` },
+
+            { id: 5, start: '2026-09-12', end: '2026-09-13', category: 'akademik',
+              title: 'Ujian Akhir Semester Antara T.A. 2025/2026',
+              details: `<p>UAS Semester Antara.</p><p class="text-sm text-gray-400">💡 Selesaikan ujian ini dengan tuntas agar tidak ada tanggungan nilai yang menghambat kelulusan.</p>` },
+
+            { id: 6, start: '2026-09-21', end: '2026-09-25', category: 'akademik',
+              title: 'Penyusunan KRS Semester Ganjil T.A. 2026/2027',
+              details: `<p><strong class="text-white">Penting:</strong> Pengisian KRS Semester Ganjil.</p>
+                <ul class="list-disc pl-5 space-y-1.5 mt-2">
+                    <li>Pastikan mata kuliah yang tersisa tidak menumpuk di semester akhir.</li>
+                    <li>Ambil MK yang mendukung penyusunan Tugas Akhir (IoT / sistem tertanam / pengolahan data).</li>
+                    <li>Verifikasi bersama Dosen Pembimbing Akademik.</li>
+                </ul>` },
+
+            /* ---------- OKTOBER 2026 ---------- */
+            { id: 7, start: '2026-10-01', end: '2026-10-01', category: 'akademik',
+              title: 'Rapat Dosen Semester Ganjil & Genap Percepatan T.A. 2026/2027',
+              details: `<p>Rapat koordinasi dosen untuk menyambut Semester Ganjil dan Genap Percepatan. Tidak ada kewajiban khusus bagi mahasiswa, namun menandai dimulainya periode akademik baru.</p>` },
+
+            { id: 8, start: '2026-10-03', end: '2026-10-03', category: 'yudisium',
+              title: 'Batas Akhir Pendaftaran Yudisium 1 Semester Ganjil T.A. 2026/2027',
+              details: `<p>Batas akhir pendaftaran Yudisium 1 Semester Ganjil.</p>` },
+
+            { id: 9, start: '2026-10-05', end: '2026-10-05', category: 'akademik',
+              title: 'Perkuliahan Pertama Semester Ganjil & Genap Percepatan T.A. 2026/2027',
+              details: `<p><strong class="text-white">Perkuliahan pertama!</strong> Awal Semester Ganjil 2026/2027.</p>
+                <p class="text-sm text-gray-400">💡 Susun timeline realistis antara perkuliahan dan riset Tugas Akhir sejak minggu pertama.</p>` },
+
+            { id: 10, start: '2026-10-07', end: '2026-10-07', category: 'yudisium',
+              title: 'Yudisium 1 Semester Ganjil T.A. 2026/2027 (Wisuda Ke-35)',
+              details: `<p>Yudisium periode 1 yang berbarengan dengan rangkaian Wisuda Ke-35.</p>` },
+
+            { id: 11, start: '2026-10-22', end: '2026-10-22', category: 'yudisium',
+              title: 'Batas Akhir Pengiriman Laporan Wisuda Ke-35 (LDIKTI)',
+              details: `<p>Batas akhir pengiriman laporan penyelenggaraan Wisuda Ke-35 ke LDIKTI.</p>` },
+
+            /* ---------- NOVEMBER 2026 ---------- */
+            { id: 12, start: '2026-11-04', end: '2026-11-04', category: 'libur',
+              title: 'Libur Hari Raya Pagerwesi',
+              details: `<p>Hari raya keagamaan Hindu — libur nasional/kampus.</p>` },
+
+            { id: 13, start: '2026-11-11', end: '2026-11-11', category: 'yudisium',
+              title: 'Wisuda ITB STIKOM Bali Ke-35',
+              details: `<p>Prosesi Wisuda Ke-35 ITB STIKOM Bali.</p>` },
+
+            { id: 14, start: '2026-11-16', end: '2026-11-22', category: 'akademik',
+              title: 'Ujian Tengah Semester (UTS) Ganjil T.A. 2026/2027',
+              details: `<p>Ujian Tengah Semester ganjil.</p>
+                <p class="text-sm text-gray-400">💡 Seimbangkan belajar UTS dengan progres Tugas Akhir — jangan biarkan riset mandek selama periode ujian.</p>` },
+
+            /* ---------- DESEMBER 2026 ---------- */
+            { id: 15, start: '2026-12-18', end: '2027-01-10', category: 'akademik',
+              title: 'Perkuliahan Pertemuan 14',
+              details: `<p>Perkuliahan lanjutan pertemuan 14 yang membentang melintasi libur akhir semester.</p>` },
+
+            /* ---------- JANUARI 2027 ---------- */
+            { id: 16, start: '2027-01-11', end: '2027-01-17', category: 'akademik',
+              title: 'Ujian Akhir Semester (UAS) Ganjil T.A. 2026/2027',
+              details: `<p>UAS Semester Ganjil.</p>` },
+
+            { id: 17, start: '2027-01-30', end: '2027-01-30', category: 'akademik',
+              title: 'Pengumuman',
+              details: `<p>Pengumuman hasil akademik. Cek portal mahasiswa untuk nilai &amp; status.</p>` },
+
+            /* ---------- FEBRUARI 2027 ---------- */
+            { id: 18, start: '2027-02-08', end: '2027-02-10', category: 'akademik',
+              title: 'Pendaftaran Herregistrasi',
+              details: `<p>Herregistrasi (registrasi ulang) semester berikutnya. Jangan sampai terlewat — status aktif kuliah bergantung pada ini.</p>` },
+
+            /* ---------- MARET 2027 ---------- */
+            { id: 19, start: '2027-03-01', end: '2027-03-01', category: 'akademik',
+              title: 'Perkuliahan Pertama Semester Genap T.A. 2026/2027 & Ganjil Percepatan T.A. 2027/2028',
+              details: `<p>Awal perkuliahan Semester Genap 2026/2027 (dan Ganjil Percepatan 2027/2028).</p>` },
+
+            { id: 20, start: '2027-03-07', end: '2027-03-10', category: 'libur',
+              title: 'Libur Hari Raya Nyepi Tahun Baru Caka 1949',
+              details: `<p>Libur Hari Raya Nyepi — Tahun Baru Caka 1949.</p>` },
+
+            { id: 21, start: '2027-03-11', end: '2027-03-12', category: 'libur',
+              title: 'Libur Hari Raya Idul Fitri 1448 Hijriah',
+              details: `<p>Libur Hari Raya Idul Fitri 1448 H.</p>` },
+
+            { id: 22, start: '2027-03-22', end: '2027-03-22', category: 'akademik',
+              title: 'Perkuliahan Pertemuan 3',
+              details: `<p>Perkuliahan pertemuan 3 Semester Genap.</p>` },
+
+            { id: 23, start: '2027-03-29', end: '2027-03-29', category: 'ta',
+              title: 'Batas Akhir Pendaftaran Sidang Tugas Akhir',
+              details: `<p class="text-purple-300 font-semibold">⚠️ Deadline krusial untuk kelulusan Anda.</p>
+                <h3 class="text-base font-semibold text-white mt-3">Checklist sebelum mendaftar sidang</h3>
+                <ul class="list-disc pl-5 space-y-1.5">
+                    <li>Draft laporan Tugas Akhir final &amp; disetujui seluruh pembimbing.</li>
+                    <li>Purwarupa IoT Wheelchair (ESP32 + MPU6050 + GPS) sudah stabil &amp; teruji.</li>
+                    <li>Bebas plagiarisme / cek similarity, serta administrasi keuangan lunas.</li>
+                    <li>Formulir pendaftaran sidang lengkap.</li>
+                </ul>
+                <p class="text-sm text-gray-400 mt-3">Daftar jauh sebelum tanggal ini agar tidak kehabisan slot penguji.</p>` },
+
+            /* ---------- APRIL 2027 ---------- */
+            { id: 24, start: '2027-04-10', end: '2027-04-10', category: 'yudisium',
+              title: 'Batas Akhir Pendaftaran Yudisium',
+              details: `<p>Batas akhir pendaftaran yudisium. Targetkan berkas sidang &amp; revisi selesai sebelum tanggal ini.</p>` },
+
+            { id: 25, start: '2027-04-19', end: '2027-04-25', category: 'akademik',
+              title: 'Ujian Tengah Semester (UTS) Genap T.A. 2026/2027',
+              details: `<p>UTS Semester Genap.</p>` },
+
+            /* ---------- JUNI 2027 ---------- */
+            { id: 26, start: '2027-06-21', end: '2027-06-27', category: 'akademik',
+              title: 'Ujian Akhir Semester (UAS) Genap T.A. 2026/2027',
+              details: `<p>UAS Semester Genap — penutup tahun akademik 2026/2027.</p>` },
+
+            /* ---------- MILESTONE PRIBADI (TARGET) ---------- */
+            { id: 101, start: '2026-11-25', end: '2026-11-25', category: 'ta', personal: true,
+              title: 'Ujian Proposal Skripsi (Target Pribadi)',
+              details: `<p class="text-purple-300 font-semibold">🎯 Milestone Tugas Akhir: Ujian Proposal.</p>
+                <h3 class="text-base font-semibold text-white mt-3">Target Utama</h3>
+                <ul class="list-disc pl-5 space-y-1.5">
+                    <li>Selesaikan purwarupa integrasi <strong>ESP32</strong>, sensor <strong>MPU6050</strong>, dan <strong>GPS</strong> untuk kursi roda (IoT Wheelchair).</li>
+                    <li>Pastikan transmisi data ke dashboard web berjalan lancar.</li>
+                    <li>Bimbingan intensif &amp; pendaftaran Ujian Proposal bersama <strong>Prof. Evi</strong>, <strong>Pak Djoko</strong>, dan <strong>Bu Anitha</strong>.</li>
+                </ul>
+                <h3 class="text-base font-semibold text-white mt-3">Resource Penting</h3>
+                <ul class="space-y-2">
+                    <li><a href="https://randomnerdtutorials.com/" target="_blank" class="text-purple-400 hover:underline"><i class="fa-solid fa-external-link-alt text-xs mr-1"></i>Referensi ESP32 &amp; IoT</a></li>
+                </ul>` },
+
+            { id: 102, start: '2027-01-15', end: '2027-01-15', category: 'karir', personal: true,
+              title: 'Mulai Intensif IELTS &amp; Draf Motivation Letter LPDP (Target Pribadi)',
+              details: `<p class="text-emerald-300 font-semibold">🌍 Persiapan beasiswa S2.</p>
+                <ul class="list-disc pl-5 space-y-1.5 mt-3">
+                    <li>Mulai belajar intensif IELTS/TOEFL (target IELTS minimal 6.5).</li>
+                    <li>Pelajari buku panduan LPDP Tahap 1 sebagai pemanasan atau incar LoA Conditional.</li>
+                    <li>Susun draf Motivation Letter (fokus portofolio e-Rehab &amp; sistem skala nasional).</li>
+                </ul>
+                <h3 class="text-base font-semibold text-white mt-3">Tautan Penting</h3>
+                <ul class="space-y-2">
+                    <li><a href="https://lpdp.kemenkeu.go.id/" target="_blank" class="text-emerald-400 hover:underline"><i class="fa-solid fa-external-link-alt text-xs mr-1"></i>Website Resmi LPDP Kemenkeu</a></li>
+                    <li><a href="https://www.ielts.org/" target="_blank" class="text-emerald-400 hover:underline"><i class="fa-solid fa-external-link-alt text-xs mr-1"></i>Info &amp; Pendaftaran IELTS</a></li>
+                </ul>` },
+
+            { id: 103, start: '2027-02-20', end: '2027-02-20', category: 'ta', personal: true,
+              title: 'Seminar Terbuka / Seminar Hasil Skripsi (Target Pribadi)',
+              details: `<p class="text-purple-300 font-semibold">🎯 Finalisasi &amp; presentasi hasil.</p>
+                <ul class="list-disc pl-5 space-y-1.5 mt-3">
+                    <li>Pengujian final sistem pemantauan kursi roda.</li>
+                    <li>Pelaksanaan Seminar Hasil / Seminar Terbuka.</li>
+                    <li>Siapkan slide, demo alat, dan dokumentasi pengujian.</li>
+                </ul>` },
+
+            { id: 104, start: '2027-04-06', end: '2027-04-06', category: 'ta', personal: true,
+              title: 'Target Hari-H Sidang Skripsi (Target Pribadi)',
+              details: `<p class="text-purple-300 font-semibold">🎯 Sidang Skripsi.</p>
+                <ul class="list-disc pl-5 space-y-1.5 mt-3">
+                    <li>Hadapi Sidang Skripsi dengan demo purwarupa IoT Wheelchair yang sudah stabil.</li>
+                    <li>Segera eksekusi revisi agar <strong>SKL (Surat Keterangan Lulus)</strong> cepat terbit.</li>
+                    <li>Tanggal ini diselaraskan agar berada setelah batas pendaftaran sidang (29 Mar) dan sebelum batas yudisium (10 Apr).</li>
+                </ul>` },
+
+            { id: 105, start: '2027-04-30', end: '2027-04-30', category: 'karir', personal: true,
+              title: 'Deadline Beasiswa AAS &amp; Poles CV Karier (Target Pribadi)',
+              details: `<div class="grid sm:grid-cols-2 gap-5">
+                    <div>
+                        <h3 class="text-base font-semibold text-emerald-400 mb-2">Jalur Beasiswa (AAS)</h3>
+                        <p class="text-sm mb-3">Pendaftaran Australia Awards Scholarship biasanya ditutup akhir April. Pastikan dokumen SKL, IELTS, dan esai sudah diunggah.</p>
+                        <a href="https://www.australiaawardsindonesia.org/" target="_blank" class="text-emerald-400 text-sm hover:underline"><i class="fa-solid fa-external-link-alt text-xs mr-1"></i>Website AAS Indonesia</a>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-semibold text-blue-400 mb-2">Jalur Karier</h3>
+                        <p class="text-sm mb-3">Poles CV dan GitHub. Tonjolkan stack modern (Laravel, SvelteKit, Docker) dan pengalaman (PERNEFRI, BSM Cruise).</p>
+                        <a href="https://www.kalibrr.id/" target="_blank" class="text-blue-400 text-sm hover:underline block"><i class="fa-solid fa-external-link-alt text-xs mr-1"></i>Cari Lowongan di Kalibrr</a>
+                        <a href="https://www.techinasia.com/jobs" target="_blank" class="text-blue-400 text-sm hover:underline block mt-1"><i class="fa-solid fa-external-link-alt text-xs mr-1"></i>Tech in Asia Jobs</a>
+                    </div>
+                </div>` },
+
+            { id: 106, start: '2027-05-26', end: '2027-05-26', category: 'ta', personal: true,
+              title: 'Wisuda &amp; LoA Hunting (Target Pribadi)',
+              details: `<p class="text-purple-300 font-semibold">🎓 Selamat Wisuda!</p>
+                <p class="mt-3">Ijazah dan Transkrip Nilai final kini di tangan — tiket utama untuk administrasi.</p>
+                <ul class="list-disc pl-5 space-y-1.5 mt-3">
+                    <li>Fokus mendaftar ke universitas S2 tujuan untuk mendapatkan LoA (Letter of Acceptance) Unconditional.</li>
+                    <li>LoA sangat memperkuat peluang lulus LPDP Tahap 2.</li>
+                </ul>` },
+
+            { id: 107, start: '2027-06-15', end: '2027-06-15', category: 'karir', personal: true,
+              title: 'Eksekusi LPDP Tahap 2, CPNS &amp; Tech Jobs (Target Pribadi)',
+              details: `<h3 class="text-base font-semibold text-white mb-3">Tiga Front Sekaligus</h3>
+                <div class="space-y-3">
+                    <div class="p-3 bg-gray-700/50 rounded-lg border-l-4 border-emerald-500">
+                        <h4 class="font-bold text-emerald-400">1. LPDP Tahap 2</h4>
+                        <p class="text-sm">Gunakan LoA dan Ijazah untuk mendaftar. <a href="https://lpdp.kemenkeu.go.id/" target="_blank" class="underline">Link LPDP</a></p>
+                    </div>
+                    <div class="p-3 bg-gray-700/50 rounded-lg border-l-4 border-blue-500">
+                        <h4 class="font-bold text-blue-400">2. Tech Jobs (Target Gaji Kompetitif)</h4>
+                        <p class="text-sm">Apply posisi Mid-Level Full-Stack Developer atau DevOps Engineer.</p>
+                    </div>
+                    <div class="p-3 bg-gray-700/50 rounded-lg border-l-4 border-yellow-500">
+                        <h4 class="font-bold text-yellow-400">3. CPNS (Pranata Komputer)</h4>
+                        <p class="text-sm">Pantau pembukaan SSCASN. Incar Kementerian Pusat untuk Tukin tinggi.<br>
+                        <a href="https://sscasn.bkn.go.id/" target="_blank" class="text-yellow-400 hover:underline"><i class="fa-solid fa-external-link-alt text-xs mr-1"></i>Portal SSCASN BKN</a></p>
+                    </div>
+                </div>` },
+        ];
+
+        /* =========================================================
+           KALENDER — HELPER
+        ========================================================= */
+        const MONTHS   = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+        const MONTHS_S = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+        const DAYS     = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+        const DOW      = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+
+        const today = new Date();
+        const TODAY_ISO = toISO(today);
+        let viewYear  = today.getFullYear();
+        let viewMonth = today.getMonth();
+        let activeFilter = 'all';
+
+        function toISO(d) {
+            return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        }
+        function parseISO(s) {
+            const [y, m, d] = s.split('-').map(Number);
+            return new Date(y, m - 1, d);
+        }
+        function fmtLong(iso) {
+            const d = parseISO(iso);
+            return `${DAYS[d.getDay()]}, ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+        }
+        function fmtShort(iso) {
+            const d = parseISO(iso);
+            return `${d.getDate()} ${MONTHS_S[d.getMonth()]} ${d.getFullYear()}`;
+        }
+        function fmtRange(start, end) {
+            const s = parseISO(start), e = parseISO(end);
+            if (start === end) return fmtShort(start);
+            if (s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear())
+                return `${s.getDate()} – ${e.getDate()} ${MONTHS_S[s.getMonth()]} ${s.getFullYear()}`;
+            return `${fmtShort(start)} – ${fmtShort(end)}`;
+        }
+        function daysUntil(iso) {
+            const target = parseISO(iso);
+            const base = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            return Math.round((target - base) / 86400000);
+        }
+        function matchesFilter(e) {
+            return activeFilter === 'all' || e.category === activeFilter;
+        }
+        function eventsOnDay(iso) {
+            return EVENTS
+                .filter(e => iso >= e.start && iso <= e.end && matchesFilter(e))
+                .sort((a, b) => (a.start === b.start) ? a.title.localeCompare(b.title) : a.start.localeCompare(b.start));
+        }
+
+        /* =========================================================
+           KALENDER — FILTER & LEGEND
+        ========================================================= */
+        const filtersEl = document.getElementById('filters');
+        const legendEl  = document.getElementById('legend');
+
+        function buildFilters() {
+            const allBtn = `<button data-filter="all" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/20">Semua Agenda</button>`;
+            const cats = Object.entries(CATEGORIES).map(([key, c]) =>
+                `<button data-filter="${key}" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all bg-gray-800 text-gray-300 border border-gray-700 hover:text-white flex items-center gap-2">
+                    <span style="background:${c.dot}" class="w-2.5 h-2.5 rounded-full"></span>${c.label}</button>`
+            ).join('');
+            filtersEl.innerHTML = allBtn + cats;
+
+            legendEl.innerHTML = Object.values(CATEGORIES).map(c =>
+                `<span class="flex items-center gap-2"><span style="background:${c.dot}" class="w-3 h-3 rounded-full"></span>${c.label}</span>`
+            ).join('');
+        }
+
+        filtersEl.addEventListener('click', (e) => {
+            const btn = e.target.closest('.filter-btn');
+            if (!btn) return;
+            activeFilter = btn.dataset.filter;
+            filtersEl.querySelectorAll('.filter-btn').forEach(b => {
+                const active = b.dataset.filter === activeFilter;
+                b.classList.toggle('bg-blue-600', active);
+                b.classList.toggle('text-white', active);
+                b.classList.toggle('shadow-lg', active);
+                b.classList.toggle('shadow-blue-600/20', active);
+                b.classList.toggle('bg-gray-800', !active);
+                b.classList.toggle('text-gray-300', !active);
+                b.classList.toggle('border', !active);
+                b.classList.toggle('border-gray-700', !active);
+            });
+            renderCalendar();
+        });
+
+        /* =========================================================
+           KALENDER — RENDER
+        ========================================================= */
+        const gridEl = document.getElementById('calendar-grid');
+        const dowHeaderEl = document.getElementById('dow-header');
+        const monthLabel = document.getElementById('month-label');
+        const monthSub = document.getElementById('month-sub');
+        const agendaListEl = document.getElementById('agenda-list');
+        const agendaCountEl = document.getElementById('agenda-count');
+        const nextAgendaEl = document.getElementById('next-agenda');
+
+        function buildDowHeader() {
+            dowHeaderEl.innerHTML = DOW.map((d, i) =>
+                `<div class="py-3 text-center text-xs sm:text-sm font-semibold ${i === 0 || i === 6 ? 'text-rose-300/90' : 'text-gray-400'}">${d}</div>`
+            ).join('');
+        }
+
+        function renderCalendar() {
+            monthLabel.textContent = `${MONTHS[viewMonth]} ${viewYear}`;
+            monthSub.textContent = `T.A. 2026/2027`;
+
+            const first = new Date(viewYear, viewMonth, 1);
+            const startOffset = first.getDay(); // 0 = Minggu
+            const gridStart = new Date(viewYear, viewMonth, 1 - startOffset);
+
+            gridEl.innerHTML = '';
+            const frag = document.createDocumentFragment();
+
+            for (let i = 0; i < 42; i++) {
+                const d = new Date(gridStart.getFullYear(), gridStart.getMonth(), gridStart.getDate() + i);
+                const iso = toISO(d);
+                const otherMonth = d.getMonth() !== viewMonth;
+                const isToday = iso === TODAY_ISO;
+                const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+                const evs = eventsOnDay(iso);
+
+                const chips = evs.slice(0, 3).map(e => {
+                    const c = CATEGORIES[e.category];
+                    const label = e.personal ? '🎯 ' + e.title.replace(' (Target Pribadi)', '') : e.title;
+                    return `<button data-event="${e.id}" title="${e.title}"
+                        class="chip w-full text-left text-[10px] sm:text-[11px] leading-tight px-1.5 py-1 rounded border ${c.chip} flex items-center gap-1.5">
+                        <span style="background:${c.dot}" class="w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
+                        <span class="hidden sm:inline truncate">${label}</span>
+                    </button>`;
+                }).join('');
+
+                const more = evs.length > 3
+                    ? `<div class="text-[10px] text-gray-500 pl-1.5">+${evs.length - 3} agenda lain</div>`
+                    : '';
+
+                const cell = document.createElement('div');
+                cell.className = [
+                    'day-cell relative border border-gray-800/70 min-h-[92px] sm:min-h-[118px] p-1.5 flex flex-col gap-1',
+                    otherMonth ? 'opacity-40' : '',
+                    isWeekend && !otherMonth ? 'bg-gray-900/20' : '',
+                    isToday ? 'ring-2 ring-inset ring-blue-500 bg-blue-500/5' : ''
+                ].join(' ');
+                cell.dataset.date = iso;
+                cell.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs sm:text-sm font-semibold ${isToday ? 'bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center' : (isWeekend ? 'text-rose-300/80' : 'text-gray-300')}">${d.getDate()}</span>
+                        ${evs.length && !otherMonth ? `<span class="text-[9px] text-gray-500">${evs.length}</span>` : ''}
+                    </div>
+                    <div class="flex flex-col gap-0.5 flex-1 min-h-0 overflow-hidden">${chips}${more}</div>
+                `;
+                frag.appendChild(cell);
+            }
+            gridEl.appendChild(frag);
+
+            renderAgenda();
+            renderNextAgenda();
+        }
+
+        function renderAgenda() {
+            const firstISO = toISO(new Date(viewYear, viewMonth, 1));
+            const lastISO = toISO(new Date(viewYear, viewMonth + 1, 0));
+            const list = EVENTS
+                .filter(e => e.start <= lastISO && e.end >= firstISO && matchesFilter(e))
+                .sort((a, b) => a.start.localeCompare(b.start));
+
+            agendaCountEl.textContent = list.length;
+
+            if (!list.length) {
+                agendaListEl.innerHTML = `<div class="text-center text-gray-500 text-sm py-10">
+                    <i class="fa-regular fa-calendar-xmark text-2xl mb-2 block"></i>Tidak ada agenda pada bulan ini.</div>`;
+                return;
+            }
+
+            agendaListEl.innerHTML = list.map(e => {
+                const c = CATEGORIES[e.category];
+                return `<button data-event="${e.id}" class="event-row w-full text-left bg-gray-900/40 hover:bg-gray-900/70 border border-gray-700/60 rounded-xl p-3 transition-colors">
+                    <div class="flex items-start gap-3">
+                        <span style="background:${c.dot}" class="w-2.5 h-2.5 rounded-full mt-1.5 flex-shrink-0"></span>
+                        <div class="min-w-0">
+                            <p class="text-[11px] font-semibold" style="color:${c.dot}">${fmtRange(e.start, e.end)}</p>
+                            <p class="text-sm text-gray-100 font-medium leading-snug">${e.title}</p>
+                            <span class="inline-block text-[10px] mt-1 px-2 py-0.5 rounded-full bg-gray-800 text-gray-400">${c.label}</span>
+                        </div>
+                    </div>
+                </button>`;
+            }).join('');
+        }
+
+        function renderNextAgenda() {
+            const upcoming = EVENTS
+                .filter(e => e.end >= TODAY_ISO)
+                .sort((a, b) => a.start.localeCompare(b.start))[0];
+
+            if (!upcoming) { nextAgendaEl.classList.add('hidden'); return; }
+            nextAgendaEl.classList.remove('hidden');
+            const c = CATEGORIES[upcoming.category];
+            const diff = daysUntil(upcoming.start);
+            const whenText = diff > 0 ? `${diff} hari lagi` : (diff === 0 ? 'Hari ini' : 'Sedang berlangsung');
+            nextAgendaEl.innerHTML = `
+                <span style="background:${c.dot}" class="w-2.5 h-2.5 rounded-full flex-shrink-0"></span>
+                <div class="min-w-0">
+                    <p class="text-[11px] text-gray-500 uppercase tracking-wide font-semibold">Agenda Terdekat · ${whenText}</p>
+                    <p class="text-gray-100 truncate font-medium">${upcoming.title}</p>
+                </div>`;
+        }
+
+        /* =========================================================
+           KALENDER — MODAL
+        ========================================================= */
+        function openEventModal(id) {
+            const e = EVENTS.find(x => x.id === id);
+            if (!e) return;
+            const c = CATEGORIES[e.category];
+            openModalPanel({
+                categoryText: e.personal ? c.label + ' · Target Pribadi' : c.label,
+                categoryClass: c.badge,
+                titleHTML: e.title,
+                date: e.start === e.end
+                    ? fmtLong(e.start)
+                    : `${fmtRange(e.start, e.end)} · ${DAYS[parseISO(e.start).getDay()]}–${DAYS[parseISO(e.end).getDay()]}`,
+                body: e.details
+            });
+        }
+
+        function openDayModal(iso) {
+            const evs = eventsOnDay(iso);
+            if (!evs.length) {
+                openModalPanel({
+                    categoryText: 'Agenda Harian',
+                    categoryClass: 'bg-gray-700 text-gray-200',
+                    title: fmtLong(iso),
+                    date: 'Tidak ada agenda',
+                    body: `<div class="text-center text-gray-500 py-8"><i class="fa-regular fa-mug-hot text-3xl mb-3 block"></i>Tidak ada agenda pada hari ini.</div>`
+                });
+                return;
+            }
+            const body = evs.map(e => {
+                const c = CATEGORIES[e.category];
+                return `<div class="border border-gray-700/60 rounded-xl p-4 bg-gray-900/40">
+                    <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${c.badge}">${e.personal ? c.label + ' · Target' : c.label}</span>
+                    <h3 class="text-lg font-semibold text-white mt-2">${e.title}</h3>
+                    <p class="text-xs text-gray-500 mb-2">${fmtRange(e.start, e.end)}</p>
+                    <div class="text-sm text-gray-300 space-y-2">${e.details}</div>
+                </div>`;
+            }).join('');
+            openModalPanel({
+                categoryText: 'Agenda Harian',
+                categoryClass: 'bg-gray-700 text-gray-200',
+                title: fmtLong(iso),
+                date: `${evs.length} agenda`,
+                body
+            });
+        }
+
+        gridEl.addEventListener('click', (e) => {
+            const chip = e.target.closest('[data-event]');
+            if (chip) { openEventModal(Number(chip.dataset.event)); return; }
+            const cell = e.target.closest('[data-date]');
+            if (cell) openDayModal(cell.dataset.date);
+        });
+
+        agendaListEl.addEventListener('click', (e) => {
+            const row = e.target.closest('[data-event]');
+            if (row) openEventModal(Number(row.dataset.event));
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; } renderCalendar();
+        });
+        document.getElementById('next-btn').addEventListener('click', () => {
+            viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; } renderCalendar();
+        });
+        document.getElementById('today-btn').addEventListener('click', () => {
+            viewYear = today.getFullYear(); viewMonth = today.getMonth(); renderCalendar();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (!modalBackdrop.classList.contains('hidden')) return;
+            if (viewCalendar.classList.contains('hidden')) return;
+            if (e.key === 'ArrowLeft') document.getElementById('prev-btn').click();
+            if (e.key === 'ArrowRight') document.getElementById('next-btn').click();
+        });
+
+        /* =========================================================
+           ROADMAP — DATA
+        ========================================================= */
         const timelineData = [
             {
                 id: 1,
@@ -158,7 +869,7 @@
                 id: 4,
                 date: "Maret - April 2027",
                 title: "Deadline AAS & Persiapan Karir",
-                category: "beasiswa", // Primary for visual, but holds dual info
+                category: "beasiswa",
                 icon: "fa-paper-plane",
                 color: "bg-gradient-to-r from-purple-500 to-emerald-500",
                 textColor: "text-purple-400",
@@ -208,18 +919,15 @@
                 summary: "Mendaftar LPDP Tahap 2, memantau formasi CPNS, dan apply kerja.",
                 details: `
                     <h3 class="text-lg font-semibold text-white mb-2">Tiga Front Sekaligus:</h3>
-                    
                     <div class="space-y-4">
                         <div class="p-3 bg-gray-700/50 rounded-lg border-l-4 border-purple-500">
                             <h4 class="font-bold text-purple-400">1. LPDP Tahap 2</h4>
                             <p class="text-sm">Gunakan LoA dan Ijazah untuk mendaftar. <a href="https://lpdp.kemenkeu.go.id/" target="_blank" class="underline">Link LPDP</a></p>
                         </div>
-                        
                         <div class="p-3 bg-gray-700/50 rounded-lg border-l-4 border-emerald-500">
                             <h4 class="font-bold text-emerald-400">2. Tech Jobs Jakarta (Gaji 10 Juta)</h4>
                             <p class="text-sm">Apply untuk posisi Mid-Level Full-Stack Developer atau DevOps Engineer.</p>
                         </div>
-
                         <div class="p-3 bg-gray-700/50 rounded-lg border-l-4 border-yellow-500">
                             <h4 class="font-bold text-yellow-400">3. CPNS (Pranata Komputer)</h4>
                             <p class="text-sm">Pantau pembukaan SSCASN. Incar Kementerian Pusat (Kemenkeu/BPK) untuk Tukin tinggi. <br>
@@ -230,18 +938,22 @@
             }
         ];
 
-        const container = document.getElementById('timeline-container');
-        const filterBtns = document.querySelectorAll('.filter-btn');
+        /* =========================================================
+           ROADMAP — RENDER
+        ========================================================= */
+        const tlContainer = document.getElementById('timeline-container');
+        const roadFilterBtns = document.querySelectorAll('#filters-roadmap .filter-btn');
 
         function renderTimeline(filter = 'all') {
-            container.innerHTML = '';
-            
-            const filteredData = timelineData.filter(item => filter === 'all' || item.category === filter || (item.id === 4 && (filter === 'beasiswa' || filter === 'karir')));
+            tlContainer.innerHTML = '';
+
+            const filteredData = timelineData.filter(item =>
+                filter === 'all' || item.category === filter || (item.id === 4 && (filter === 'beasiswa' || filter === 'karir'))
+            );
 
             filteredData.forEach((item, index) => {
                 const isLeft = index % 2 === 0;
-                
-                // Color maps for badges
+
                 const badgeColors = {
                     akademik: 'bg-blue-900 text-blue-300',
                     beasiswa: 'bg-purple-900 text-purple-300',
@@ -249,16 +961,13 @@
                 };
                 let badgeClass = badgeColors[item.category] || 'bg-gray-700 text-gray-300';
                 let catLabel = item.category;
-                if(item.id === 4) { badgeClass = 'bg-gray-800 text-gray-300'; catLabel = 'Beasiswa & Karir'; }
+                if (item.id === 4) { badgeClass = 'bg-gray-800 text-gray-300'; catLabel = 'Beasiswa & Karir'; }
 
                 const html = `
                     <div class="relative flex md:justify-between items-center w-full mb-12 group cursor-pointer" onclick="openModal(${item.id})">
-                        <!-- Connector Dot -->
-                        <div class="absolute left-[24px] md:left-1/2 transform md:-translate-x-1/2 -translate-x-1/2 w-8 h-8 rounded-full ${item.color} flex items-center justify-center border-4 border-[#0f172a] shadow-[0_0_15px_rgba(0,0,0,0.5)] z-10 transition-transform group-hover:scale-110">
+                        <div class="absolute left-[24px] md:left-1/2 transform md:-translate-x-1/2 -translate-x-1/2 w-8 h-8 rounded-full ${item.color} flex items-center justify-center border-4 border-[#0b1120] shadow-[0_0_15px_rgba(0,0,0,0.5)] z-10 transition-transform group-hover:scale-110">
                             <i class="fas ${item.icon} text-white text-xs"></i>
                         </div>
-
-                        <!-- Card Container -->
                         <div class="w-full pl-16 md:pl-0 md:w-[45%] ${isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12 md:ml-auto text-left'}">
                             <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-lg hover:border-gray-500 transition-colors">
                                 <span class="text-xs font-bold uppercase tracking-wider px-2 py-1 rounded ${badgeClass} inline-block mb-2">${catLabel}</span>
@@ -272,12 +981,11 @@
                         </div>
                     </div>
                 `;
-                container.innerHTML += html;
+                tlContainer.innerHTML += html;
             });
 
-            // Trigger reflow to animate
             requestAnimationFrame(() => {
-                const cards = container.querySelectorAll('.w-full');
+                const cards = tlContainer.querySelectorAll('.w-full');
                 cards.forEach((card, i) => {
                     card.style.opacity = '0';
                     card.style.transform = 'translateY(20px)';
@@ -290,12 +998,33 @@
             });
         }
 
-        filterBtns.forEach(btn => {
+        function openModal(id) {
+            const data = timelineData.find(item => item.id === id);
+            if (!data) return;
+
+            const badgeColors = {
+                akademik: 'bg-blue-900 text-blue-300',
+                beasiswa: 'bg-purple-900 text-purple-300',
+                karir: 'bg-emerald-900 text-emerald-300'
+            };
+            let catLabel = data.category;
+            let badgeClass = badgeColors[data.category] || 'bg-gray-700 text-gray-300';
+            if (data.id === 4) { badgeClass = 'bg-gray-800 text-gray-300'; catLabel = 'Beasiswa & Karir'; }
+
+            openModalPanel({
+                categoryText: catLabel,
+                categoryClass: badgeClass,
+                title: data.title,
+                date: data.date,
+                body: data.details
+            });
+        }
+
+        roadFilterBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const filter = e.target.dataset.filter;
-                
-                // Update active state
-                filterBtns.forEach(b => {
+
+                roadFilterBtns.forEach(b => {
                     b.classList.remove('ring-2', 'ring-gray-400');
                     if (b.dataset.filter === 'all') {
                         b.classList.replace('bg-gray-700', 'bg-gray-800');
@@ -318,65 +1047,12 @@
             });
         });
 
-        const modalBackdrop = document.getElementById('modal-backdrop');
-        const modalContent = document.getElementById('modal-content');
-        const btnClose = document.getElementById('close-modal');
-
-        function openModal(id) {
-            const data = timelineData.find(item => item.id === id);
-            if(!data) return;
-
-            document.getElementById('modal-title').textContent = data.title;
-            document.getElementById('modal-date').textContent = data.date;
-            
-            const badgeColors = {
-                akademik: 'bg-blue-900 text-blue-300',
-                beasiswa: 'bg-purple-900 text-purple-300',
-                karir: 'bg-emerald-900 text-emerald-300'
-            };
-            let catLabel = data.category;
-            let badgeClass = badgeColors[data.category] || 'bg-gray-700 text-gray-300';
-            if(data.id === 4) { badgeClass = 'bg-gray-800 text-gray-300'; catLabel = 'Beasiswa & Karir'; }
-            
-            const catElem = document.getElementById('modal-category');
-            catElem.textContent = catLabel;
-            catElem.className = `text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2 inline-block ${badgeClass}`;
-
-            document.getElementById('modal-body').innerHTML = data.details;
-
-            modalBackdrop.classList.remove('hidden');
-            // Small delay to allow display:block to apply before animating opacity
-            setTimeout(() => {
-                modalBackdrop.classList.remove('opacity-0');
-                modalBackdrop.classList.add('opacity-100');
-                modalContent.classList.remove('scale-95');
-                modalContent.classList.add('scale-100');
-            }, 10);
-            
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        }
-
-        function closeModal() {
-            modalBackdrop.classList.remove('opacity-100');
-            modalBackdrop.classList.add('opacity-0');
-            modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
-            
-            setTimeout(() => {
-                modalBackdrop.classList.add('hidden');
-                document.body.style.overflow = '';
-            }, 300); // match transition duration
-        }
-
-        btnClose.addEventListener('click', closeModal);
-        modalBackdrop.addEventListener('click', (e) => {
-            if (e.target === modalBackdrop) closeModal();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !modalBackdrop.classList.contains('hidden')) closeModal();
-        });
-
-        // Init
+        /* =========================================================
+           INIT
+        ========================================================= */
+        buildFilters();
+        buildDowHeader();
+        renderCalendar();
         renderTimeline('all');
     </script>
 </body>
